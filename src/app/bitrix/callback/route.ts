@@ -4,7 +4,7 @@ import fetch from 'node-fetch';
 
 const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
 const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
-const REDIRECT_URI = 'https://bitrix-auth-api.vercel.app/bitrix/callback';
+const REDIRECT_URI = 'https://pcm-btx-app.vercel.app/bitrix/callback';
 
 // Define an interface for the expected structure of token data
 interface TokenData {
@@ -40,7 +40,7 @@ export async function GET(request: Request) {
     if (tokenData.access_token) {
         // Fetch Bitrix user data
         const userInfoResponse = await fetch(
-        `https://syntactics.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
+        `https://b24-20cwai.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
         );
         const userInfo = await userInfoResponse.json();
         console.log("User Info:", userInfo);
