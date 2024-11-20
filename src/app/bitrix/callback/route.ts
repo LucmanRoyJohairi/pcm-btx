@@ -37,6 +37,7 @@ export async function GET(request: Request) {
     });
 
     const tokenData = (await tokenResponse.json()) as TokenData;
+    console.log("🚀 ~ GET ~ tokenData:", tokenData)
     if (tokenData.access_token) {
         // Fetch Bitrix user data
         const userInfoResponse = await fetch(
