@@ -2,8 +2,10 @@
 import { NextResponse } from 'next/server';
 import fetch from 'node-fetch';
 
-const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
-const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
+// const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
+// const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
+const CLIENT_ID = "local.673d98cf9d1928.42941819";
+const CLIENT_SECRET = "2BIcu8TBjQCCeb4t4c399uZ2uf7rXh2RHblvd5MPcXOzYFBcVE";
 const REDIRECT_URI = 'https://pcm-btx-app.vercel.app/bitrix/callback';
 
 // Define an interface for the expected structure of token data
