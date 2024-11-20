@@ -6,6 +6,14 @@ const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
 const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
 const REDIRECT_URI = 'https://bitrix-auth-api.vercel.app/bitrix/callback';
 
+// Define an interface for the expected structure of token data
+interface TokenData {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+    refresh_token?: string;
+}
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const code = searchParams.get('code');
@@ -28,21 +36,22 @@ export async function GET(request: Request) {
         }),
     });
 
-    const tokenData = await tokenResponse.json();
+    const tokenData = (await tokenResponse.json()) as TokenData;
     if (tokenData.access_token) {
         // Fetch Bitrix user data
-        const userInfoResponse = await fetch(`https://syntactics.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`);
+        const userInfoResponse = await fetch(
+        `https://syntactics.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
+        );
         const userInfo = await userInfoResponse.json();
         console.log("User Info:", userInfo);
 
         // Set token as an HTTP-only cookie in the response headers
-        const response = NextResponse.redirect('http://206.189.147.71:54030/');
-        response.cookies.set('auth_token', tokenData.access_token, {
+        const response = NextResponse.redirect("/");
+        response.cookies.set("auth_token", tokenData.access_token, {
         httpOnly: true,
         secure: true,
-        maxAge: tokenData.expires_in,
+        maxAge: tokenData.expires_in * 1000, // convert to milliseconds
         });
-
         return response;
     } else {
         return NextResponse.json({ error: 'Token exchange failed' }, { status: 400 });
