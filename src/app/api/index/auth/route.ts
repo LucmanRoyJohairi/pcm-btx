@@ -4,7 +4,7 @@ import { cookies } from 'next/headers';
 export async function GET() {
   // Access cookies
     const cookieStorage = await cookies();
-    const authToken = cookieStorage.get('auth_token');
+    const authToken = cookieStorage.get('auth_token')?.value;
 
     console.log("🚀 ~ getUserData ~ cookieStorage:", cookieStorage.getAll());
     console.log("🚀 ~ getUserData ~ authToken:", authToken);
@@ -16,19 +16,8 @@ export async function GET() {
     });
     }
 
-    // Simulate fetching user data based on the authToken (e.g., from a database)
-    const userData = await fetchUserData(authToken);
-
-    return new Response(JSON.stringify({ userData }), {
-    status: 200,
-    headers: { 'Content-Type': 'application/json' },
+    return new Response(JSON.stringify({ authToken }), {
+      status: 200,
+      headers: { 'Content-Type': 'application/json' },
     });
-}
-
-async function fetchUserData(authToken: RequestCookie) {
-  console.log("🚀 ~ fetchUserData ~ authToken:", authToken)
-  // Example logic to fetch user data
-  // This can be an actual database query or external API request
-  // return { name: "John Doe", email: "john.doe@example.com" };  // Example user data
-  return { name: "John Doe", email: "john.doe@example.com" };  // Example user data
 }
