@@ -43,7 +43,7 @@ export async function GET(request: Request) {
     if (tokenData.access_token) {
         // Fetch Bitrix user data
         const userInfoResponse = await fetch(
-        `https://b24-20cwai.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
+        `https://b24-a0vcr8.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
         );
         const userInfo = await userInfoResponse.json();
         console.log("User Info:", userInfo);
