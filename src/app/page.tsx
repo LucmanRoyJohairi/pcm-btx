@@ -1,9 +1,11 @@
 'use client';
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 export default function Home() {
+  const router = useRouter();
   useEffect(() => {
     axios
       .get('/api/index/auth')
@@ -11,6 +13,7 @@ export default function Home() {
         console.log("🚀 ~ .then ~ data:", response.data);
       })
       .catch((error) => {
+        router.push("/login")
         console.error(error);
       });
   }, []);
