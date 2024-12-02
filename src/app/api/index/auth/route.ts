@@ -1,9 +1,10 @@
+import { RequestCookie } from 'next/dist/compiled/@edge-runtime/cookies';
 import { cookies } from 'next/headers';
 
 export async function GET() {
   // Access cookies
     const cookieStorage = await cookies();
-    const authToken = cookieStorage.get('auth_token')?.value;
+    const authToken = cookieStorage.get('auth_token');
 
     console.log("🚀 ~ getUserData ~ cookieStorage:", cookieStorage.getAll());
     console.log("🚀 ~ getUserData ~ authToken:", authToken);
@@ -24,9 +25,10 @@ export async function GET() {
     });
 }
 
-async function fetchUserData(authToken: string) {
+async function fetchUserData(authToken: RequestCookie) {
   console.log("🚀 ~ fetchUserData ~ authToken:", authToken)
   // Example logic to fetch user data
   // This can be an actual database query or external API request
+  // return { name: "John Doe", email: "john.doe@example.com" };  // Example user data
   return { name: "John Doe", email: "john.doe@example.com" };  // Example user data
 }
