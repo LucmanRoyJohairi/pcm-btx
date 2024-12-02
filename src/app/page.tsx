@@ -1,4 +1,18 @@
+import { cookies } from 'next/headers';
 import Image from "next/image";
+import { useEffect } from "react";
+
+useEffect(()=>{
+  getUserData();
+},[]);
+
+export async function getUserData() {
+  const cookieStorage = await cookies();
+  const authToken = cookieStorage.get('auth_token');
+  
+  console.log("🚀 ~ getUserData ~ cookieStorage:", cookieStorage)
+  console.log("🚀 ~ getUserData ~ authToken:", authToken)
+}
 
 export default function Home() {
   return (
