@@ -1,7 +1,6 @@
-// src/app/api/index/route.ts
 import { cookies } from 'next/headers';
 
-export async function GET(request: Request) {
+export async function GET() {
   // Access cookies
     const cookieStorage = await cookies();
     const authToken = cookieStorage.get('auth_token')?.value;
