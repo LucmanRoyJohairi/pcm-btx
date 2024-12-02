@@ -25,6 +25,7 @@ export async function GET() {
 }
 
 async function fetchUserData(authToken: string) {
+  console.log("🚀 ~ fetchUserData ~ authToken:", authToken)
   // Example logic to fetch user data
   // This can be an actual database query or external API request
   return { name: "John Doe", email: "john.doe@example.com" };  // Example user data
