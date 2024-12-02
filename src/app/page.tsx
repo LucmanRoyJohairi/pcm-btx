@@ -1,19 +1,16 @@
 'use client';
-import { cookies } from 'next/headers';
 import Image from "next/image";
 import { useEffect } from "react";
 
-useEffect(()=>{
-  getUserData();
-},[]);
-
-export async function getUserData() {
-  const cookieStorage = await cookies();
-  const authToken = cookieStorage.get('auth_token');
-  
-  console.log("🚀 ~ getUserData ~ cookieStorage:", cookieStorage)
-  console.log("🚀 ~ getUserData ~ authToken:", authToken)
-}
+useEffect(() => {
+  fetch('/api/index/auth')
+    .then((res) => res.json())
+    .then((data) => {
+      console.log("🚀 ~ .then ~ data:", data)
+      
+    })
+    .catch(console.error);
+}, []);
 
 export default function Home() {
   return (
