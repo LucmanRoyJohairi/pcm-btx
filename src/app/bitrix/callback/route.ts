@@ -26,39 +26,45 @@ export async function GET(request: Request) {
 
     try {
     // Exchange authorization code for access token
-    const tokenResponse = await fetch('https://oauth.bitrix.info/oauth/token/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams({
-        client_id: CLIENT_ID,
-        client_secret: CLIENT_SECRET,
-        redirect_uri: REDIRECT_URI,
-        code,
-        grant_type: 'authorization_code',
-        }),
-    });
-
-    const tokenData = (await tokenResponse.json()) as TokenData;
-    console.log("🚀🚀 ~ GET ~ tokenData:", tokenData)
-    if (tokenData.access_token) {
-        // Fetch Bitrix user data
-        const userInfoResponse = await fetch(
-        `https://b24-a0vcr8.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
-        );
-        const userInfo = await userInfoResponse.json();
-        console.log("User Info:", userInfo);
-
-        // Set token as an HTTP-only cookie in the response headers
-        const response = NextResponse.redirect("/");
-        response.cookies.set("auth_token", tokenData.access_token, {
-        httpOnly: true,
-        secure: true,
-        maxAge: tokenData.expires_in * 1000, // convert to milliseconds
+        const tokenResponse = await fetch('https://oauth.bitrix.info/oauth/token/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams({
+            client_id: CLIENT_ID,
+            client_secret: CLIENT_SECRET,
+            redirect_uri: REDIRECT_URI,
+            code,
+            grant_type: 'authorization_code',
+            }),
         });
-        return response;
-    } else {
-        return NextResponse.json({ error: 'Token exchange failed' }, { status: 400 });
-    }
+
+        const tokenData = (await tokenResponse.json()) as TokenData;
+        console.log("🚀🚀 ~ GET ~ tokenData:", tokenData)
+        if (tokenData.access_token) {
+            // Fetch Bitrix user data
+            const userInfoResponse = await fetch(
+            `https://b24-a0vcr8.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
+            );
+            const userInfo = await userInfoResponse.json();
+            console.log("User Info:", userInfo);
+
+            // Set token as an HTTP-only cookie in the response headers
+            const origin = new URL(request.url).origin;
+            const testResponse = NextResponse.redirect(`${origin}/`);
+            const response = NextResponse.redirect("https://pcm-btx-app.vercel.app/");
+
+            console.log(testResponse);
+
+
+            response.cookies.set("auth_token", tokenData.access_token, {
+            httpOnly: true,
+            secure: true,
+            maxAge: tokenData.expires_in * 1000, // convert to milliseconds
+            });
+            return response;
+        } else {
+            return NextResponse.json({ error: 'Token exchange failed' }, { status: 400 });
+        }
     } catch (error) {
     console.error("Error:", error);
     return NextResponse.json({ error: 'Server error during authentication' }, { status: 500 });
