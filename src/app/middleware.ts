@@ -6,14 +6,14 @@ export function middleware(request: NextRequest) {
     console.log("🚀 ~ middleware ~ token:", token)
 
     // Define the paths that require authentication
-    // const protectedPaths = ['/'];
+    const protectedPaths = ['/'];
 
-    // if (protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))) {
+    if (protectedPaths.some((path) => request.nextUrl.pathname.startsWith(path))) {
     if (!token) {
         const loginUrl = new URL('/login', request.url);
         return NextResponse.redirect(loginUrl);
     }
-    // }
+    }
 
     return NextResponse.next();
 }
