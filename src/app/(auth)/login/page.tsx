@@ -6,7 +6,7 @@ export default function Login() {
 
   const handleBitrixSignIn = async () => {
     // Define your client ID and the callback URL
-    const clientId = "local.674d1906f062b3.17136796"; // Use your actual client ID
+    const clientId = "local.674d27c9cb3804.87370892"; // Use your actual client ID
     const redirectUri = encodeURIComponent(
       "https://pcm-btx-app.vercel.app/bitrix/callback" // Update to your Next.js callback route
     );
