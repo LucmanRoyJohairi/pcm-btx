@@ -12,16 +12,10 @@ export default function Home() {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get('/api/index/auth');
-        const token = response.data.authToken;
-        console.log("🚀 ~ checkAuthentication ~ response:", response)
         const { data } = await axios.get('/api/index/user');
-        const user = data.userInfo.result
-        const userInfo = await axios.get(`/https://b24-a0vcr8.bitrix24.com/rest/user.get.json?ID=${user.ID}&auth=${token}`);
-
-        console.log("🚀 ~ checkAuthentication ~ userInfo:", userInfo)
 
         console.log("🚀 ~ Authentication successful:", response.data);
-        console.log("🚀 ~ user data:", user.ID);
+        console.log("🚀 ~ user data:", data);
       } catch (error) {
         console.error("Authentication error:", error);
         router.push("/login"); // Redirect to login on error
