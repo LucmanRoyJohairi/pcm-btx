@@ -4,8 +4,8 @@ import fetch from 'node-fetch';
 
 // const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
 // const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
-const CLIENT_ID = "local.66f671b44d4c36.19940783";
-const CLIENT_SECRET = "B5Li3rFOsjPaTX8A6YsTS5Id72KCaQgBh1k7OCjenZlB9VzhXX";
+const CLIENT_ID = "local.674e7e4d5f4a02.57385705";
+const CLIENT_SECRET = "jHxd0SvBLYa9GAEwTu06JxYX35TW5nhrJfX7cRqvJ0oX9ELkpH";
 const REDIRECT_URI = 'https://pcm-btx-app.vercel.app/bitrix/callback';
 
 // Define an interface for the expected structure of token data
