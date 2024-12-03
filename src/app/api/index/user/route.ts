@@ -16,7 +16,7 @@ export async function GET() {
     }
 
     const userInfoResponse = await fetch(
-        `https://b24-a0vcr8.bitrix24.com/rest/user.current?auth=${authToken}`
+        `https://syntactics.bitrix24.com/rest/user.current?auth=${authToken}`
         );
     const userInfo = await userInfoResponse.json();
 
