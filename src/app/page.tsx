@@ -11,8 +11,8 @@ export default function Home() {
   useEffect(() => {
     const checkAuthentication = async () => {
       try {
-        const response = await axios.get('/index/auth');
-        const { data } = await axios.get('/index/user');
+        const response = await axios.get('/api/index/auth');
+        const { data } = await axios.get('/api/index/user');
 
         console.log("🚀 ~ Authentication successful:", response.data);
         console.log("🚀 ~ user data:", data);
