@@ -12,10 +12,10 @@ export default function Home() {
     const checkAuthentication = async () => {
       try {
         const response = await axios.get('/api/index/auth');
-        const { data } = await axios.get('/api/index/user');
+        const response2 = await axios.get('/api/index/user');
 
-        console.log("🚀 ~ Authentication successful:", response.data);
-        console.log("🚀 ~ user data:", data);
+        console.log("🚀 ~ Authentication successful:", response);
+        console.log("🚀 ~ user data:", response2);
       } catch (error) {
         console.error("Authentication error:", error);
         router.push("/login"); // Redirect to login on error
