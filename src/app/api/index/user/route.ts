@@ -21,7 +21,7 @@ export async function GET() {
     console.log("🚀 ~ GET ~ userInfoResponse:", userInfoResponse)
 
     const departmentInfoResponse = await fetch(
-        `https://pcm-btx-app.vercel.app/rest/user.depaartment?auth=${authToken}`
+        `https://pcm-btx-app.vercel.app/rest/user.department?auth=${authToken}`
     );
     console.log("🚀 ~ GET ~ departmentInfoResponse:", departmentInfoResponse)
 
