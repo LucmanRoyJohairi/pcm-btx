@@ -16,11 +16,18 @@ export async function GET() {
     }
 
     const userInfoResponse = await fetch(
-        `https://pcm-btx-app.vercel.app/rest/user.department?auth=${authToken}`
+        `https://pcm-btx-app.vercel.app/rest/user.current?auth=${authToken}`
     );
     console.log("🚀 ~ GET ~ userInfoResponse:", userInfoResponse)
 
+    const departmentInfoResponse = await fetch(
+        `https://pcm-btx-app.vercel.app/rest/user.depaartment?auth=${authToken}`
+    );
+    console.log("🚀 ~ GET ~ departmentInfoResponse:", departmentInfoResponse)
+
+
     const userInfo = await userInfoResponse.json();
+    console.log("🚀 ~ GET ~ userInfo:", userInfo)
 
     return new Response(JSON.stringify({ userInfo }), {
         status: 200,
