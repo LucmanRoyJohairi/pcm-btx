@@ -46,7 +46,7 @@ export async function GET(request: Request) {
             `https://pcm-btx-app.vercel.app/rest/user.current?auth=${tokenData.access_token}`
             );
             const userInfo = await userInfoResponse.json();
-            console.log("User Info:", userInfo);
+            console.log("User Info:", userInfoResponse);
 
             // Set token as an HTTP-only cookie in the response headers
             const origin = new URL(request.url).origin;
