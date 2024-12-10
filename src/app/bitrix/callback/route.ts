@@ -4,8 +4,8 @@ import fetch from 'node-fetch';
 
 // const CLIENT_ID = process.env.BITRIX_CLIENT_ID!;
 // const CLIENT_SECRET = process.env.BITRIX_CLIENT_SECRET!;
-const CLIENT_ID = "local.674e7e4d5f4a02.57385705";
-const CLIENT_SECRET = "jHxd0SvBLYa9GAEwTu06JxYX35TW5nhrJfX7cRqvJ0oX9ELkpH";
+const CLIENT_ID = "local.674d27c9cb3804.87370892";
+const CLIENT_SECRET = "z1w8yGQHJBATgmt051AYxrNd30QWGAbMYjcP1QYBcAh6GyizVt";
 const REDIRECT_URI = 'https://pcm-btx-app.vercel.app/bitrix/callback';
 
 // Define an interface for the expected structure of token data
@@ -43,7 +43,7 @@ export async function GET(request: Request) {
         if (tokenData.access_token) {
             // Fetch Bitrix user data
             const userInfoResponse = await fetch(
-            `https://syntactics.bitrix24.com/rest/user.current?auth=${tokenData.access_token}`
+            `https://pcm-btx-app.vercel.app/rest/user.current?auth=${tokenData.access_token}`
             );
             const userInfo = await userInfoResponse.json();
             console.log("User Info:", userInfo);

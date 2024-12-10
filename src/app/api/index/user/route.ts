@@ -16,8 +16,10 @@ export async function GET() {
     }
 
     const userInfoResponse = await fetch(
-        `https://syntactics.bitrix24.com/rest/user.current?auth=${authToken}`
-        );
+        `https://pcm-btx-app.vercel.app/rest/user.department?auth=${authToken}`
+    );
+    console.log("🚀 ~ GET ~ userInfoResponse:", userInfoResponse)
+
     const userInfo = await userInfoResponse.json();
 
     return new Response(JSON.stringify({ userInfo }), {
