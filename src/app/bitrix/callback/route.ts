@@ -43,10 +43,10 @@ export async function GET(request: Request) {
         if (tokenData.access_token) {
             // Fetch Bitrix user data
             const userInfoResponse = await fetch(
-            `https://pcm-btx-app.vercel.app/rest/user.current?auth=${tokenData.access_token}`
+            `https://pcm-btx-app.vercel.app/rest/department.get.json?ID=1?auth=${tokenData.access_token}`
             );
             // const userInfo = await userInfoResponse.json();
-            console.log("User Response: 🚀🚀", userInfoResponse.json());
+            console.log("User Response: 🚀🚀", userInfoResponse);
 
             // Set token as an HTTP-only cookie in the response headers
             const origin = new URL(request.url).origin;
